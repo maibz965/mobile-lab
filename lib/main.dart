@@ -1,121 +1,334 @@
 import 'package:flutter/material.dart';
 
+// ============================================================
+// EDIT YOUR DETAILS HERE
+// Replace the placeholder text below with your own info.
+// ============================================================
+const String profileName = 'Your Name';
+const String profileRole = 'Software Engineering Student';
+const String profileBio =
+    'Write a short bio about yourself here: where you study, '
+    'what you are interested in, and what you want to build.';
+
+const String profileEmail = 'your.email@example.com';
+const String profilePhone = '+60 12-345 6789';
+const String profileLocation = 'Kuala Lumpur, Malaysia';
+
+const List<String> profileSkills = [
+  'Skill 1',
+  'Skill 2',
+  'Skill 3',
+  'Skill 4',
+];
+
+// Leave empty to show your initial instead of a photo.
+// To use a photo later:
+//   1. Put it in assets/images/ (e.g. assets/images/me.jpg)
+//   2. Set the path below, e.g. 'assets/images/me.jpg'
+//   3. Uncomment the `assets:` lines in pubspec.yaml
+const String profileImageAsset = '';
+
+// Accent colour for the dark theme. Change this to try others,
+// e.g. Colors.purpleAccent, Colors.orangeAccent, Colors.blueAccent.
+const Color accentColor = Colors.tealAccent;
+// ============================================================
+
+// Dark palette
+const Color backgroundColor = Color(0xFF0D0D0D);
+const Color surfaceColor = Color(0xFF1A1A1A);
+const Color textColor = Color(0xFFEDEDED);
+const Color mutedTextColor = Color(0xFF9E9E9E);
+
 void main() {
-  runApp(const MyApp());
+  runApp(const ProfileApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ProfileApp extends StatelessWidget {
+  const ProfileApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Profile Dashboard',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: accentColor,
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: accentColor,
+          surface: surfaceColor,
+          onSurface: textColor,
+        ),
+        scaffoldBackgroundColor: backgroundColor,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: backgroundColor,
+          foregroundColor: textColor,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+        ),
+        drawerTheme: const DrawerThemeData(backgroundColor: surfaceColor),
+        dividerColor: Colors.white12,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const ProfilePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        title: const Text(
+          'Profile',
+          style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1),
+        ),
+        centerTitle: true,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: Colors.white10),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      drawer: const AppDrawer(),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Column(
+              children: [
+                const ProfileAvatar(),
+                const SizedBox(height: 20),
+                Text(
+                  profileName,
+                  textAlign: TextAlign.center,
+                  style: textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  profileRole,
+                  style: textTheme.titleMedium?.copyWith(color: accentColor),
+                ),
+                const SizedBox(height: 36),
+                const SectionTitle('About me'),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    profileBio,
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: mutedTextColor,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                const SectionTitle('Contact'),
+                const InfoTile(icon: Icons.email_outlined, text: profileEmail),
+                const InfoTile(icon: Icons.phone_outlined, text: profilePhone),
+                const InfoTile(
+                  icon: Icons.location_on_outlined,
+                  text: profileLocation,
+                ),
+                const SizedBox(height: 32),
+                const SectionTitle('Skills'),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      for (final skill in profileSkills)
+                        Chip(
+                          label: Text(skill),
+                          labelStyle: const TextStyle(color: textColor),
+                          backgroundColor: surfaceColor,
+                          side: BorderSide(
+                            color: accentColor.withValues(alpha: 0.5),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileAvatar extends StatelessWidget {
+  const ProfileAvatar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const hasImage = profileImageAsset != '';
+
+    // Thin accent ring around the avatar
+    return Container(
+      padding: const EdgeInsets.all(3),
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: accentColor,
+      ),
+      child: CircleAvatar(
+        radius: 70,
+        backgroundColor: surfaceColor,
+        backgroundImage: hasImage ? const AssetImage(profileImageAsset) : null,
+        child: hasImage
+            ? null
+            : Text(
+                profileName.isNotEmpty ? profileName[0].toUpperCase() : '?',
+                style: const TextStyle(
+                  fontSize: 56,
+                  fontWeight: FontWeight.bold,
+                  color: accentColor,
+                ),
+              ),
+      ),
+    );
+  }
+}
+
+class SectionTitle extends StatelessWidget {
+  final String title;
+  const SectionTitle(this.title, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Container(
+            width: 3,
+            height: 18,
+            decoration: BoxDecoration(
+              color: accentColor,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            title.toUpperCase(),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.5,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class InfoTile extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const InfoTile({super.key, required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+      leading: Icon(icon, color: accentColor),
+      title: Text(text, style: const TextStyle(color: textColor, fontSize: 15)),
+    );
+  }
+}
+
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.white10)),
+            ),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    profileName,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(profileRole, style: TextStyle(color: accentColor)),
+                ],
+              ),
+            ),
+          ),
+          _drawerItem(
+            context,
+            icon: Icons.person_outline,
+            title: 'Profile',
+            onTap: () => Navigator.pop(context),
+          ),
+          _drawerItem(
+            context,
+            icon: Icons.settings_outlined,
+            title: 'Settings',
+            onTap: () => _comingSoon(context, 'Settings'),
+          ),
+          _drawerItem(
+            context,
+            icon: Icons.info_outline,
+            title: 'About',
+            onTap: () => _comingSoon(context, 'About'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _drawerItem(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: accentColor),
+      title: Text(title, style: const TextStyle(color: textColor)),
+      onTap: onTap,
+    );
+  }
+
+  void _comingSoon(BuildContext context, String page) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$page page coming soon'),
+        backgroundColor: surfaceColor,
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }
