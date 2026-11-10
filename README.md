@@ -1,4 +1,4 @@
-# lab_2
+# fultter_lab
 
 A new Flutter project.
 
